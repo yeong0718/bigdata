@@ -30,3 +30,4 @@ print(df)
 
 # CSV 파일로 저장 가능
 df.to_csv("melon_top100.csv", index=False, encoding="utf-8-sig")
+
