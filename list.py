@@ -2,7 +2,7 @@ import random
 import time
 
 songs = ["a노래", "b노래", "c노래", "d노래"]
-Print(songs)
+print(songs)
 print(songs[0])
 print(songs[1])
 print(songs[2])
