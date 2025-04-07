@@ -14,6 +14,9 @@ print(f"당신이 입력한 값은? {n}")
 # 멜론 100 출력
 if n == "1":
     print("멜론 100")
+    #수집한 데이터를 출력합니다
+    for song in range(100):
+        print(f"{songs[i][0]}, {songs[i][1]} - {songs[i][2]}")
 #else:
 #    print("1이 아닙니다.")
 # 만약에 2을 입력하면
@@ -24,6 +27,10 @@ elif n == "3":
     print("멜론 10")
 elif n == "4":
     print("AI 추천 노래")
+     # 멜론 차트 100 중에서 노래 한곡 추천 해주는 서비스 만들기
+    ai_song = random.choice(songs)
+    print(f"추천곡은 {ai_song[1]} - {ai_song[2]} 입니다.")
+    
 elif n == "5":
     print("가수 이름 검색")
 # ...
