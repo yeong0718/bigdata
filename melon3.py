@@ -4,17 +4,20 @@ import random
 
 # 멜론 차트 페이지 URL
 url = 'https://www.melon.com/chart/index.htm'
+
+# 헤더 설정
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36'
 }
 
+# 웹페이지 요청
 response = requests.get(url, headers=headers)
-
 soup = BeautifulSoup(response.text, 'html.parser')
 
+# 노래 제목과 아티스트를 담을 리스트
 songs = []
 
-# 차트에서 제목과 가수 정보를 가져옵니다.
+# 멜론 차트 수집
 for entry in soup.select('tr.lst50, tr.lst100'):
     rank = entry.select_one('span.rank').get_text()
     title = entry.select_one('div.ellipsis.rank01 a').get_text()
@@ -30,46 +33,42 @@ print("4. AI 추천 노래")
 print("5. 가수 이름 검색")
 print("==================")
 
-# 사용자 입력 받기
+# 메뉴 선택
 n = input("메뉴선택(숫자입력): ")
-print(f"당신이 입력한 값은: {n}")
+print(f"당신이 입력한 값은? {n}")
 
 # 메뉴 1: 멜론 100
 if n == "1":
-    print("\n 멜론 TOP 100")
-    for i in range(len(songs)):
-        print(f"{songs[i][0]}위: {songs[i][1]} - {songs[i][2]}")
+    print("멜론 100")
+    for i in range(100):
+        print(f"{songs[i][0]}. {songs[i][1]} - {songs[i][2]}")
 
 # 메뉴 2: 멜론 50
 elif n == "2":
-    print("\n 멜론 TOP 50")
-    for i in range(min(50, len(songs))):
-        print(f"{songs[i][0]}위: {songs[i][1]} - {songs[i][2]}")
+    print("멜론 50")
+    for i in range(50):
+        print(f"{songs[i][0]}. {songs[i][1]} - {songs[i][2]}")
 
 # 메뉴 3: 멜론 10
 elif n == "3":
-    print("\n 멜론 TOP 10")
-    for i in range(min(10, len(songs))):
-        print(f"{songs[i][0]}위: {songs[i][1]} - {songs[i][2]}")
+    print("멜론 10")
+    for i in range(10):
+        print(f"{songs[i][0]}. {songs[i][1]} - {songs[i][2]}")
 
 # 메뉴 4: AI 추천 노래
 elif n == "4":
-    print("\n AI 추천 노래")
+    print("AI 추천 노래")
     ai_song = random.choice(songs)
-    print(f"오늘의 추천곡은  {ai_song[1]} - {ai_song[2]} 입니다.")
+    print(f"추천곡은 {ai_song[1]} - {ai_song[2]} 입니다.")
 
 # 메뉴 5: 가수 이름 검색
 elif n == "5":
-    search_name = input("가수 이름을 입력하세요: ")
-    print(f"\n '{search_name}'의 노래 목록:")
-    found = False
-    for song in songs:
-        if search_name.lower() in song[2].lower():
-            print(f"{song[0]}위: {song[1]} - {song[2]}")
-            found = True
-    if not found:
-        print("해당 가수의 노래가 차트에 없습니다.")
+    print("가수 이름 검색")
+    search = input("검색할 가수 이름을 입력하세요: ")
+    for i in range(len(songs)):
+        if search.lower() in songs[i][2].lower():
+            print(f"{songs[i][0]}. {songs[i][1]} - {songs[i][2]}")
 
-# 그 외 입력
+# 그 외 숫자
 else:
-    print(" 1부터 5 사이의 숫자만 입력해주세요.")
+    print("1~5까지 입력하세요.")
